@@ -61,13 +61,14 @@ namespace Todoapp.Controllers
                 if (usr != null)
                 {
                     HttpContext.Session.SetString("UserId", usr.UserId.ToString());
-                    HttpContext.Session.SetString("UserName", usr.Username.ToString());
+                    HttpContext.Session.SetString("Username", usr.Username.ToString());
                     return RedirectToAction("LoggedIn");
                 }
                 else
                 {
                     ModelState.AddModelError("", "Incorrect usernamee or password");
                 }
+                // db.
             }
             return View();
         }
