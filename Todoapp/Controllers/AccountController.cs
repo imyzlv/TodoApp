@@ -16,7 +16,7 @@ namespace Todoapp.Controllers
 
         public IActionResult Index()
         {
-            var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "Test").Options;
+            var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
             using (TodoDbContext db = new TodoDbContext(options))
             {
                 return View(db.userAccount.ToList());
@@ -34,7 +34,7 @@ namespace Todoapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "Test").Options;
+                var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
                 using (TodoDbContext db = new TodoDbContext(options))
                 {
                     db.userAccount.Add(account);
@@ -54,10 +54,10 @@ namespace Todoapp.Controllers
         [HttpPost]
         public IActionResult Login(UserAccount user)
         {
-            var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "Test").Options;
+            var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
             using (TodoDbContext db = new TodoDbContext(options))
             {
-                var usr = db.userAccount.Single(u => u.Username == user.Username && u.Password == user.Password);
+                var usr = db.userAccount.SingleOrDefault(u => u.Username == user.Username && u.Password == user.Password);
                 if (usr != null)
                 {
                     HttpContext.Session.SetString("UserId", usr.UserId.ToString());
@@ -66,7 +66,7 @@ namespace Todoapp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Error - username or password is not correct");
+                    ModelState.AddModelError("", "Incorrect usernamee or password");
                 }
             }
             return View();
