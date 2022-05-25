@@ -30,6 +30,8 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+//Method to get the application name.
+ApplicationName.GetApplicationName();
 
 app.Run();
 

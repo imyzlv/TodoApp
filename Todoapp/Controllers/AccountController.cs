@@ -54,6 +54,7 @@ namespace Todoapp.Controllers
         [HttpPost]
         public IActionResult Login(UserAccount user)
         {
+            //InMemory db
             var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
             using (TodoDbContext db = new TodoDbContext(options))
             {
