@@ -66,9 +66,8 @@ namespace Todoapp.Controllers
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Incorrect usernamee or password");
+                    ModelState.AddModelError("", "Incorrect username or password");
                 }
-                // db.
             }
             return View();
         }
