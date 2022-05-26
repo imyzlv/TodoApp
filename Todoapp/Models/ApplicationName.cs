@@ -10,9 +10,13 @@ namespace Todoapp.Models
         public static void GetApplicationName()
         {
             //Read the stored config file and get application name from it
-            string configFile = System.IO.File.ReadAllText(@"appsettings.json");
-            var details = JObject.Parse(configFile);
-            AppName = Convert.ToString(details["ApplicationName"]);
+            string configFilePath = @"appsettings.json";
+            if (File.Exists(configFilePath))
+            {
+                string configFileContents = System.IO.File.ReadAllText(configFilePath);
+                var details = JObject.Parse(configFileContents);
+                AppName = Convert.ToString(details["ApplicationName"]);
+            }
         }
     }
 }
