@@ -12,12 +12,12 @@ namespace Todoapp.Controllers
 {
     public class AccountController : Controller
     {
-        //DbContextOptions options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "Test").Options;
+        DbContextOptions<TodoDbContext> dbOptions = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
 
         public IActionResult Index()
         {
-            var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
-            using (TodoDbContext db = new TodoDbContext(options))
+            //var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
+            using (TodoDbContext db = new TodoDbContext(dbOptions))
             {
                 return View(db.userAccount.ToList());
             }
@@ -34,8 +34,8 @@ namespace Todoapp.Controllers
         {
             if (ModelState.IsValid)
             {
-                var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
-                using (TodoDbContext db = new TodoDbContext(options))
+                //var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
+                using (TodoDbContext db = new TodoDbContext(dbOptions))
                 {
                     db.userAccount.Add(account);
                     db.SaveChanges();
@@ -54,8 +54,9 @@ namespace Todoapp.Controllers
         [HttpPost]
         public IActionResult Login(UserAccount user)
         {
-            var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
-            using (TodoDbContext db = new TodoDbContext(options))
+            //InMemory db
+            //var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
+            using (TodoDbContext db = new TodoDbContext(dbOptions))
             {
                 var usr = db.userAccount.SingleOrDefault(u => u.Username == user.Username && u.Password == user.Password);
                 if (usr != null)
