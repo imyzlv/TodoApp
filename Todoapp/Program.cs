@@ -10,7 +10,6 @@ builder.Services.AddDbContext<TodoDbContext>(options => options.UseInMemoryDatab
     builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -34,7 +33,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 //Method to get the application name from appsettings.json.
-ApplicationName.GetApplicationName();
 
 app.Run();
 

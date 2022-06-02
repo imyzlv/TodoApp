@@ -12,6 +12,7 @@
     <None Remove="Views\Account\" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Database\" />
+    <None Remove="Configuration\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.3" />
@@ -22,5 +23,6 @@
   <ItemGroup>
     <Folder Include="Views\Account\" />
     <Folder Include="Database\" />
+    <Folder Include="Configuration\" />
   </ItemGroup>
 </Project>
