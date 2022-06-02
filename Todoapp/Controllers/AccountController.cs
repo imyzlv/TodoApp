@@ -12,15 +12,16 @@ namespace Todoapp.Controllers
 {
     public class AccountController : Controller
     {
-        DbContextOptions<TodoDbContext> dbOptions = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
+        private readonly TodoDbContext _db;
+
+        public AccountController(TodoDbContext db)
+        {
+            _db = db;
+        }
 
         public IActionResult Index()
         {
-            //var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
-            using (TodoDbContext db = new TodoDbContext(dbOptions))
-            {
-                return View(db.userAccount.ToList());
-            }
+            return View(_db.userAccount.ToList());
         }
 
         public IActionResult Register()
@@ -30,16 +31,13 @@ namespace Todoapp.Controllers
 
         //Register
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Register(UserAccount account)
         {
             if (ModelState.IsValid)
             {
-                //var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
-                using (TodoDbContext db = new TodoDbContext(dbOptions))
-                {
-                    db.userAccount.Add(account);
-                    db.SaveChanges();
-                }
+                _db.userAccount.Add(account);
+                _db.SaveChanges();
                 ModelState.Clear();
                 ViewBag.Message = account.FirstName + " " + account.LastName + " was successfully registered.";
             }
@@ -51,24 +49,21 @@ namespace Todoapp.Controllers
         {
             return View();
         }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Login(UserAccount user)
         {
-            //InMemory db
-            //var options = new DbContextOptionsBuilder<TodoDbContext>().UseInMemoryDatabase(databaseName: "test").Options;
-            using (TodoDbContext db = new TodoDbContext(dbOptions))
+            var usr = _db.userAccount.SingleOrDefault(u => u.Username == user.Username && u.Password == user.Password);
+            if (usr != null)
             {
-                var usr = db.userAccount.SingleOrDefault(u => u.Username == user.Username && u.Password == user.Password);
-                if (usr != null)
-                {
-                    HttpContext.Session.SetString("UserId", usr.UserId.ToString());
-                    HttpContext.Session.SetString("Username", usr.Username.ToString());
-                    return RedirectToAction("LoggedIn");
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Incorrect username or password");
-                }
+                HttpContext.Session.SetString("UserId", usr.UserId.ToString());
+                HttpContext.Session.SetString("Username", usr.Username.ToString());
+                return RedirectToAction("LoggedIn");
+            }
+            else
+            {
+                ModelState.AddModelError("", "Incorrect username or password");
             }
             return View();
         }

@@ -7,9 +7,12 @@ namespace Todoapp.Models
     {
         public static string AppName { get; set; }
 
+        /// <summary>
+        /// Read the stored config file and get application name from it
+        /// name stored in ApplicationName.AppName
+        /// </summary>
         public static void GetApplicationName()
         {
-            //Read the stored config file and get application name from it
             string configFilePath = @"appsettings.json";
             if (File.Exists(configFilePath))
             {
