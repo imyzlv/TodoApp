@@ -5,7 +5,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<TodoDbContext>(options => options.UseInMemoryDatabase(databaseName: "test"));
+// Read SQL config from appsettings.json
+builder.Services.AddDbContext<TodoDbContext>(options => options.UseInMemoryDatabase(
+    builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 
