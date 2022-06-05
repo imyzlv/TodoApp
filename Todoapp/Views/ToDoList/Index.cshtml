@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<Todoapp.Database.ToDoList>
+
+@{
 	    ViewData["Title"] = "ToDo List";
 }
 
@@ -27,6 +29,62 @@
 
     <div class="col-sm-10">
       <h2>Tasks</h2>
+
+      <table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskList)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskLevel)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskText)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskList)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TaskLevel)
+            </th>
+            <th></th>
+        </tr>
+               @* <td>
+                    <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.UserId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
+                </td>
+                *@
+            </tr>
+        }
+    </tbody>
+</table>
+
       <div class="row">
         <div class="col-10">
           <div class="input-group">
