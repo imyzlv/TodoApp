@@ -5,9 +5,11 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-// Read SQL config from appsettings.json
+
+// Read database config from appsettings.json
 builder.Services.AddDbContext<TodoDbContext>(options => options.UseInMemoryDatabase(
     builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
@@ -31,8 +33,6 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
-//Method to get the application name from appsettings.json.
 
 app.Run();
 
