@@ -1,0 +1,44 @@
+﻿@model Todoapp.Database.ToDoList
+@{
+        ViewData["Title"] = "Add Task";
+}
+
+<h1>Add Task</h1>
+
+<hr />
+@if (ViewBag.Message != null)
+{
+    <div class="form-group">
+        <div class="col-md-10">@ViewBag.Message</div>
+    </div>
+}
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddTask">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskText" class="control-label"></label>
+                <input asp-for="TaskText" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TaskList" class="control-label"></label>
+                <input asp-for="TaskList" class="form-control" />
+            </div>
+            <div class="input-group">
+                <label asp-for="TaskLevel" class="control-label"></label>
+                <input asp-for="TaskLevel" type="number" class="form-range" min="1" max="5" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back ToDo List</a>
+</div>

@@ -54,25 +54,23 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskText)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskList)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TaskLevel)
-            </th>
-            <th></th>
+            <td>
+                @Html.Encode(item.Id)
+            </td>
+            <td>
+                @Html.Encode(item.Title)
+            </td>
+            <td>
+                @Html.Encode(item.TaskText)
+            </td>
+            <td>
+                @Html.Encode(item.TaskList)
+            </td>
+            <td>
+                @Html.Encode(item.TaskLevel)
+            </td>
+            <td></td>
         </tr>
                @* <td>
                     <a asp-action="Edit" asp-route-id="@item.UserId">Edit</a> |
@@ -80,12 +78,15 @@
                     <a asp-action="Delete" asp-route-id="@item.UserId">Delete</a>
                 </td>
                 *@
-            </tr>
         }
     </tbody>
 </table>
+        <td>
+            <a class="btn btn-primary" href="/ToDoList/AddTask" role="button">Add Task</a>
+        </td>
 
-      <div class="row">
+
+    @* <div class="row">
         <div class="col-10">
           <div class="input-group">
             <input type="text" class="form-control" placeholder="Tasks go here" readonly="">
@@ -148,3 +149,4 @@
       <button type="button" class="btn btn-primary" style="margin-top:10px">Add task</button>
     </div>
   </div>
+  *@

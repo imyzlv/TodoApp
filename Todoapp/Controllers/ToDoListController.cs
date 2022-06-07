@@ -17,5 +17,17 @@ namespace Todoapp.Controllers
         {
             return View(_db.ToDoLists.ToList());
         }
+        //Add Task
+        public IActionResult AddTask(ToDoList toDoList)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.ToDoLists.Add(toDoList);
+                _db.SaveChanges();
+                ModelState.Clear();
+                ViewBag.Message = "Task was succesfully added";
+            }
+                return View();
+        }
     }
 }
