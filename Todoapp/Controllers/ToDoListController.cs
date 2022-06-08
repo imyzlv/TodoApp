@@ -27,7 +27,7 @@ namespace Todoapp.Controllers
                 ModelState.Clear();
                 ViewBag.Message = "Task was succesfully added";
             }
-                return View();
+            return View();
         }
     }
 }

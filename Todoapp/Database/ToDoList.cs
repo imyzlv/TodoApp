@@ -16,6 +16,6 @@ namespace Todoapp.Database
         public string TaskList { get; set; }
         public int TaskLevel { get; set; }
 
-        public static DateTime Now { get; }
+        public static DateTime Now { get; } 
     }
 }
