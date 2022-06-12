@@ -10,12 +10,26 @@ namespace Todoapp.Database
         [Required]
         public string Title { get; set; }
 
+        [Display(Name = "Task text")]
         public string TaskText { get; set; }
 
         [Required]
+        [Display(Name = "Task list")]
         public string TaskList { get; set; }
-        public int TaskLevel { get; set; }
-
-        public static DateTime Now { get; } 
+        public enum TaskLevelEnum 
+        {
+            [Display(Name = "Very low")]
+            VeryLow,
+            Low,
+            Normal,
+            High,
+            [Display(Name = "Very high")]
+            VeryHigh
+        }
+        [Display(Name = "Task level")]
+        public TaskLevelEnum TaskLevel { get; set; }
+        public DateTime DateTime { get; } = DateTime.Now;
+        [Display(Name = "Done")]
+        public bool TaskDone { get; set; }
     }
 }

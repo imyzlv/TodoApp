@@ -29,5 +29,21 @@ namespace Todoapp.Controllers
             }
             return View();
         }
+        //Edit Task
+        //[HttpGet]
+        public async Task<IActionResult> EditTask(int Id, ToDoList toDoList)
+        {
+            //await _db.ToDoLists.FindAsync(Id);
+            if (ModelState.IsValid)
+            {
+                _db.ToDoLists.Update(toDoList);
+                _db.SaveChanges();
+                ModelState.Clear();
+                ViewBag.Message = "Task was succesfully updated";
+            }
+
+            return View();
+        }
+
     }
 }

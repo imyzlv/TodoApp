@@ -23,7 +23,7 @@ namespace Todoapp.Models
                         Title = "Test title",
                         TaskText = "Full task text",
                         TaskList = "List type",
-                        TaskLevel = 1,
+                        //TaskLevel = 1,
                     },
                     new ToDoList
                     {
@@ -31,7 +31,7 @@ namespace Todoapp.Models
                         Title = "Test title 2",
                         TaskText = "Full task text 2",
                         TaskList = "List type 2",
-                        TaskLevel = 2,
+                        //TaskLevel = 2,
                     }
                 );
     }
