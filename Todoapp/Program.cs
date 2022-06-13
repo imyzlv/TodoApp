@@ -1,8 +1,16 @@
-﻿using Todoapp.Database;
+using Todoapp.Database;
 using Todoapp.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 var builder = WebApplication.CreateBuilder(args);
+//var connectionString = builder.Configuration.GetConnectionString("TodoDbContextConnection") ?? throw new InvalidOperationException("Connection string 'TodoDbContextConnection' not found.");
+
+//builder.Services.AddDbContext<TodoDbContext>(options =>
+    //options.UseSqlServer(connectionString));;
+
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<TodoDbContext>();;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -28,6 +36,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseSession();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
