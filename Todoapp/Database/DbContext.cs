@@ -1,10 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Todoapp.Database;
 
 namespace Todoapp.Models
 {
-    public class TodoDbContext : DbContext
+    public class TodoDbContext : IdentityDbContext
     {
         public TodoDbContext(DbContextOptions<TodoDbContext> options) : base(options) 
         {
