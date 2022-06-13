@@ -35,6 +35,7 @@ namespace Todoapp.Models
                         //TaskLevel = 2,
                     }
                 );
+            base.OnModelCreating(modelBuilder);
     }
 }
 }

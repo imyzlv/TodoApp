@@ -9,7 +9,6 @@
   <ItemGroup>
     <None Remove="Microsoft.EntityFrameworkCore" />
     <None Remove="Microsoft.EntityFrameworkCore.InMemory" />
-    <None Remove="Views\Account\" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Database\" />
     <None Remove="Configuration\" />
@@ -31,7 +30,6 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Account\" />
     <Folder Include="Configuration\" />
   </ItemGroup>
 </Project>
