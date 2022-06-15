@@ -52,11 +52,14 @@ namespace Todoapp.Controllers
             var taskFromDb = _db.ToDoLists.Find(Id);
             if(taskFromDb == null)
             {
-                _db.ToDoLists.Update(toDoList);
-                _db.SaveChanges();
-                ModelState.Clear();
-                ViewBag.Message = "Task was succesfully updated";
+                return NotFound();
             }
+            taskFromDb.TaskText = toDoList.TaskText.ToString();
+
+            _db.ToDoLists.Update(taskFromDb);
+            _db.SaveChanges();
+            ModelState.Clear();
+            ViewBag.Message = "Task was succesfully updated";
 
             return View();
         }

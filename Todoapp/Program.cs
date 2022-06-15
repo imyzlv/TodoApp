@@ -36,10 +36,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 app.UseSession();
-app.UseAuthentication();;
+app.UseAuthentication();
 
 app.UseAuthorization();
-app.MapRazorPages(); 
+app.MapRazorPages(); // Needed for identity functionality
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
