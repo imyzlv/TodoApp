@@ -30,40 +30,35 @@ namespace Todoapp.Controllers
             return View();
         }
         //Edit Task
-        //[HttpPost]
-        public async Task<IActionResult> EditTask(int id, ToDoList toDoList)
+        //[HttpGet]
+        [HttpGet]
+        public IActionResult EditTask(int? Id)
         {
-            if (id != toDoList.Id)
+            if (Id == null || Id == 0)
             {
                 return NotFound();
             }
-            //await _db.ToDoLists.FindAsync(id);
-            if (ModelState.IsValid)
+            var task = _db.ToDoLists.Find(Id);
+            if (task == null)
             {
-                _db.ToDoLists.Update(toDoList);
-                await _db.SaveChangesAsync();
-                //ModelState.Clear();
-                ViewBag.Message = "Task was succesfully updated";
+                return NotFound();
             }
-
-            return View(toDoList);
+            return View(task);
         }
-        public async Task<IActionResult> SaveTask(int id, ToDoList toDoList)
+
+        [HttpPost]
+        public IActionResult EditTask(int Id, ToDoList toDoList)
         {
-            if (id != toDoList.Id)
-            {
-                return NotFound();
-            }
-            //await _db.ToDoLists.FindAsync(id);
-            if (ModelState.IsValid)
+            var taskFromDb = _db.ToDoLists.Find(Id);
+            if(taskFromDb == null)
             {
                 _db.ToDoLists.Update(toDoList);
-                await _db.SaveChangesAsync();
-                //ModelState.Clear();
+                _db.SaveChanges();
+                ModelState.Clear();
                 ViewBag.Message = "Task was succesfully updated";
             }
 
-            return View(toDoList);
+            return View();
         }
 
 

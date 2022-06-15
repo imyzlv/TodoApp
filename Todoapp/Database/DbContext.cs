@@ -7,7 +7,7 @@ namespace Todoapp.Models
 {
     public class TodoDbContext : IdentityDbContext
     {
-        public TodoDbContext(DbContextOptions<TodoDbContext> options) : base(options) 
+        public TodoDbContext(DbContextOptions<TodoDbContext> options) : base(options)
         {
         }
 
@@ -36,7 +36,7 @@ namespace Todoapp.Models
                     }
                 );
             base.OnModelCreating(modelBuilder);
+        }
     }
-}
 }
 
