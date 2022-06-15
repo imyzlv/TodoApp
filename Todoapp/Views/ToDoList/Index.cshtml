@@ -52,6 +52,10 @@
             <th>
                 Task added
             </th>
+            <th>
+                Done
+            </th>
+
 
 
             <th></th>
@@ -79,10 +83,22 @@
             <td>
                 @Html.Encode(item.DateTime)
             </td>
+            <td>
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                  <label class="form-check-label" for="@item.TaskDone">
+                    Default checkbox
+                  </label>
+                </div>
+
+                @Html.Encode(item.TaskDone)
+            </td>
+
 
             <td></td>
         
                <td>
+                    <a asp-action="Save" asp-route-id="@item.Id">Save</a> |
                     <a asp-action="EditTask" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
