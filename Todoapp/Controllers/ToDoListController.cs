@@ -50,6 +50,10 @@ namespace Todoapp.Controllers
         public IActionResult EditTask(int Id, ToDoList toDoList)
         {
             var taskFromDb = _db.ToDoLists.Find(Id);
+            if(taskFromDb == null)
+            {
+                return NotFound();
+            }
             taskFromDb.TaskText = toDoList.TaskText.ToString();
             taskFromDb.TaskList = toDoList.TaskList.ToString();
 
