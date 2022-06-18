@@ -77,6 +77,17 @@ namespace Todoapp.Areas.Identity.Pages.Account.Manage
             public string ConfirmPassword { get; set; }
         }
 
+        public IActionResult OnGet()
+        {
+            return RedirectToPage("./Index");
+        }
+
+        public IActionResult OnPost()
+        {
+            return RedirectToPage("./Index");
+        }
+
+      /*
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -123,5 +134,6 @@ namespace Todoapp.Areas.Identity.Pages.Account.Manage
 
             return RedirectToPage();
         }
+      */
     }
 }

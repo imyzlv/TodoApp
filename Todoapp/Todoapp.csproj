@@ -12,6 +12,7 @@
     <None Remove="Newtonsoft.Json" />
     <None Remove="Database\" />
     <None Remove="Configuration\" />
+    <None Remove="Controllers\Account_Controller.cs.old" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.3" />

@@ -54,17 +54,7 @@ namespace Todoapp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Login(UserAccount user)
         {
-            var usr = _db.userAccount.SingleOrDefault(u => u.Username == user.Username && u.Password == user.Password);
-            if (usr != null)
-            {
-                HttpContext.Session.SetString("UserId", usr.UserId.ToString());
-                HttpContext.Session.SetString("Username", usr.Username.ToString());
-                return RedirectToAction("LoggedIn");
-            }
-            else
-            {
-                ModelState.AddModelError("", "Incorrect username or password");
-            }
+           
             return View();
         }
 

@@ -7,11 +7,18 @@ var builder = WebApplication.CreateBuilder(args);
 //var connectionString = builder.Configuration.GetConnectionString("TodoDbContextConnection") ?? throw new InvalidOperationException("Connection string 'TodoDbContextConnection' not found.");
 
 //builder.Services.AddDbContext<TodoDbContext>(options =>
-    //options.UseSqlServer(connectionString));;
+//options.UseSqlServer(connectionString));;
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<TodoDbContext>();;
-
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.Password.RequireDigit = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequiredLength = 1;
+    options.Password.RequiredUniqueChars = 0;
+});
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
