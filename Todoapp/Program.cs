@@ -11,6 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<TodoDbContext>();;
+// Configure Identity options
 builder.Services.Configure<IdentityOptions>(options =>
 {
     options.Password.RequireDigit = false;
@@ -18,6 +19,13 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.Password.RequireUppercase = false;
     options.Password.RequiredLength = 1;
     options.Password.RequiredUniqueChars = 0;
+    options.Lockout.AllowedForNewUsers = false;
+});
+
+builder.Services.AddAuthentication().AddFacebook(options =>
+{
+    options.AppId = "3185878064996702";
+    options.AppSecret = "75583b17f5a7e6cfea36fc30d5911684";
 });
 // Add services to the container.
 builder.Services.AddControllersWithViews();
