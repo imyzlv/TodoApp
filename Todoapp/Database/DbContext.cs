@@ -49,25 +49,6 @@ namespace Todoapp.Models
             {
                 entity.ToTable("UserTokens");
             });
-            modelBuilder.Entity<ToDoList>()
-                .HasData(
-                    new ToDoList
-                    {
-                        Id = 1,
-                        Title = "Test title",
-                        TaskText = "Full task text",
-                        TaskList = "List type",
-                        TaskLevel = ToDoList.TaskLevelEnum.Low,
-                    },
-                    new ToDoList
-                    {
-                        Id = 2,
-                        Title = "Test title 2",
-                        TaskText = "Full task text 2",
-                        TaskList = "List type 2",
-                        TaskLevel = ToDoList.TaskLevelEnum.Low,
-                    }
-                );
 
         }
     }

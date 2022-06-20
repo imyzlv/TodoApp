@@ -1,0 +1,60 @@
+﻿@model Todoapp.Database.ToDoList
+
+@{
+    ViewData["Title"] = "Task details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Task</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TaskText)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TaskText)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TaskList)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TaskList)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TaskLevel)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TaskLevel)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateTime)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateTime)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DateTimeFinal)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DateTimeFinal)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.TaskDone)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.TaskDone)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="EditTask" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

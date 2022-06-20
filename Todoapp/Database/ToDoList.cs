@@ -28,7 +28,11 @@ namespace Todoapp.Database
         }
         [Display(Name = "Task level")]
         public TaskLevelEnum TaskLevel { get; set; }
-        public DateTime DateTime { get; } = DateTime.Now;
+        public DateTime DateTime { get; set; } = DateTime.Now;
+        [DataType(DataType.Date)]
+        [Display(Name = "Due time")]
+        public DateTime DateTimeFinal { get; set; }
+
         [Display(Name = "Done")]
         public bool TaskDone { get; set; }
     }

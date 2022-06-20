@@ -50,7 +50,10 @@
                 @Html.DisplayNameFor(model => model.TaskLevel)
             </th>
             <th>
-                Task added
+                Task updated
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateTimeFinal)
             </th>
             <th>
                 Done
@@ -66,32 +69,28 @@
         {
         <tr>
             <td>
-                @Html.Encode(item.Id)
+                @Html.DisplayFor(modelitem => item.Id)
             </td>
             <td>
-                @Html.Encode(item.Title)
+                @Html.DisplayFor(modelItem => item.Title)
             </td>
             <td>
-                @Html.Encode(item.TaskText)
+                @Html.DisplayFor(modelItem => item.TaskText)
             </td>
             <td>
-                @Html.Encode(item.TaskList)
+                @Html.DisplayFor(modelItem => item.TaskList)
             </td>
             <td>
-                @Html.Encode(item.TaskLevel)
+                @Html.DisplayFor(modelItem => item.TaskLevel)
             </td>
             <td>
-                @Html.Encode(item.DateTime)
+                @Html.DisplayFor(modelItem => item.DateTime)
             </td>
             <td>
-                <div class="form-check">
-                  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                  <label class="form-check-label" for="@item.TaskDone">
-                    Default checkbox
-                  </label>
-                </div>
-
-                @Html.Encode(item.TaskDone)
+                @Html.DisplayFor(modelItem => item.DateTimeFinal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TaskDone)
             </td>
 
 
@@ -100,7 +99,7 @@
                <td>
                     <a asp-action="Save" asp-route-id="@item.Id">Save</a> |
                     <a asp-action="EditTask" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="DetailsTask" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </td>
         </tr>

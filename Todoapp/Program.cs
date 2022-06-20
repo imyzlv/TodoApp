@@ -2,6 +2,7 @@ using Todoapp.Database;
 using Todoapp.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+@Console.OutputEncoding = System.Text.Encoding.UTF8;
 
 var builder = WebApplication.CreateBuilder(args);
 //var connectionString = builder.Configuration.GetConnectionString("TodoDbContextConnection") ?? throw new InvalidOperationException("Connection string 'TodoDbContextConnection' not found.");
@@ -38,6 +39,12 @@ builder.Services.AddSession();
 builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    SeedDataTaskList.Initialize(services);
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

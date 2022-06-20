@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Todoapp.Models;
 using Todoapp.Database;
+using Microsoft.EntityFrameworkCore;
 
 namespace Todoapp.Controllers
 {
@@ -30,7 +31,6 @@ namespace Todoapp.Controllers
             return View();
         }
         //Edit Task
-        //[HttpGet]
         [HttpGet]
         public IActionResult EditTask(int? Id)
         {
@@ -54,14 +54,35 @@ namespace Todoapp.Controllers
             {
                 return NotFound();
             }
+            taskFromDb.Title = toDoList.Title.ToString();
             taskFromDb.TaskText = toDoList.TaskText.ToString();
+            taskFromDb.TaskList = toDoList.TaskList.ToString();
+            taskFromDb.TaskLevel = toDoList.TaskLevel;
+            taskFromDb.DateTimeFinal = toDoList.DateTimeFinal;
 
             _db.ToDoLists.Update(taskFromDb);
             _db.SaveChanges();
-            ModelState.Clear();
             ViewBag.Message = "Task was succesfully updated";
 
             return View();
+        }
+
+        //Details about task
+        public async Task<IActionResult> DetailsTask(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var task = await _db.ToDoLists
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            return View(task);
         }
 
 
