@@ -85,6 +85,41 @@ namespace Todoapp.Controllers
             return View(task);
         }
 
+        //Delete task
+
+        public async Task<IActionResult> DeleteTask(int? id)
+        {
+            if (id == null || _db.ToDoLists == null)
+            {
+                return NotFound();
+            }
+
+            var task = await _db.ToDoLists
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (task == null)
+            {
+                return NotFound();
+            }
+
+            return View(task);
+        }
+
+        [HttpPost, ActionName("DeleteTask")]
+        public async Task<IActionResult> DeleteTaskConfirmed(int id)
+        {
+            if (_db.ToDoLists == null)
+            {
+                return Problem("Entity set 'ToDoList'  is null.");
+            }
+            var task = await _db.ToDoLists.FindAsync(id);
+            if (task != null)
+            {
+                _db.ToDoLists.Remove(task);
+            }
+
+            await _db.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }
