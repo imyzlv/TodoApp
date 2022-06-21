@@ -2,6 +2,7 @@
 using Todoapp.Models;
 using Todoapp.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Todoapp.Controllers
 {
@@ -14,9 +15,26 @@ namespace Todoapp.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(string taskListCheck)
         {
-            return View(_db.ToDoLists.ToList());
+            IQueryable<string> listQuery = from m in _db.ToDoLists
+                                            orderby m.TaskList
+                                            select m.TaskList;
+            var task = from m in _db.ToDoLists
+                         select m;
+
+            if (!string.IsNullOrEmpty(taskListCheck))
+            {
+                task = task.Where(x => x.TaskList == taskListCheck);
+            }
+
+            var taskListViewList = new TaskListModel
+            {
+                TaskList = new SelectList(await listQuery.Distinct().ToListAsync()),
+                ToDoLists = await task.ToListAsync()
+            };
+
+            return View(taskListViewList);
         }
         //Add Task
         public IActionResult AddTask(ToDoList toDoList)
@@ -59,6 +77,7 @@ namespace Todoapp.Controllers
             taskFromDb.TaskList = toDoList.TaskList.ToString();
             taskFromDb.TaskLevel = toDoList.TaskLevel;
             taskFromDb.DateTimeFinal = toDoList.DateTimeFinal;
+            taskFromDb.TaskDone = toDoList.TaskDone;
 
             _db.ToDoLists.Update(taskFromDb);
             _db.SaveChanges();
@@ -120,6 +139,22 @@ namespace Todoapp.Controllers
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        //Task done/undone
+        public IActionResult TaskDone(int id, ToDoList toDoList)
+        {
+            var taskFromDb = _db.ToDoLists.Find(id);
+            if (taskFromDb == null)
+            {
+                return NotFound();
+            }
+            taskFromDb.TaskDone = !toDoList.TaskDone;
+
+            _db.ToDoLists.Update(taskFromDb);
+            _db.SaveChanges();
+
+            return RedirectToAction(nameof(Index));
+        }
+
 
     }
 }

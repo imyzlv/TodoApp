@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
+using Todoapp.Database;
 
 namespace Todoapp.Models
 {
@@ -10,6 +11,7 @@ namespace Todoapp.Models
         public string LastName { get; set; }
         [Required]
         public string UserName { get; set; }
+        public ICollection<ToDoList> ToDoLists { get; set; }
     }
 }
 

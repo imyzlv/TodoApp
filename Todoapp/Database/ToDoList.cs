@@ -1,5 +1,6 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
+using Todoapp.Models;
+
 namespace Todoapp.Database
 {
     public class ToDoList
@@ -16,7 +17,8 @@ namespace Todoapp.Database
         [Required]
         [Display(Name = "Task list")]
         public string TaskList { get; set; }
-        public enum TaskLevelEnum 
+
+        public enum TaskLevelEnum
         {
             [Display(Name = "Very low")]
             VeryLow,
@@ -26,14 +28,19 @@ namespace Todoapp.Database
             [Display(Name = "Very high")]
             VeryHigh
         }
+
         [Display(Name = "Task level")]
         public TaskLevelEnum TaskLevel { get; set; }
+        
         public DateTime DateTime { get; set; } = DateTime.Now;
+        
         [DataType(DataType.Date)]
         [Display(Name = "Due time")]
         public DateTime DateTimeFinal { get; set; }
 
         [Display(Name = "Done")]
         public bool TaskDone { get; set; }
+        
+        public UserAccount UserAccount { get; set; }
     }
 }

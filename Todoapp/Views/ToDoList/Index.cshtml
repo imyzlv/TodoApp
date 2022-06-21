@@ -1,5 +1,5 @@
 ﻿@using static Todoapp.Database.ToDoList
-@model IEnumerable<Todoapp.Database.ToDoList>
+@model Todoapp.Models.TaskListModel
 
 @{
 	    ViewData["Title"] = "ToDo List";
@@ -10,22 +10,18 @@
       <h2>Lists</h2>
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
-          <a class="nav-link" href="#">List #0</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">List #1</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">List #2</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">List #3</a>
+        <p>
+
+        <select asp-for="TaskListCheck" asp-items="Model.TaskList" method="get">
+            <option value="">All</option>
+        </select>
+
+            <input type="submit" value="Filter" />
+        </p>
+
         </li>
 
       </ul>
-      <button type="button" class="btn btn-primary">New list</button>
-      <button type="button" class="btn btn-warning">Edit</button>
-      <hr class="d-sm-none">
     </div>
 
     <div class="col-8">
@@ -35,25 +31,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.ToDoLists[0].Id)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.ToDoLists[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskText)
+                @Html.DisplayNameFor(model => model.ToDoLists[0].TaskText)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskList)
+                @Html.DisplayNameFor(model => model.ToDoLists[0].TaskList)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.TaskLevel)
+                @Html.DisplayNameFor(model => model.ToDoLists[0].TaskLevel)
             </th>
             <th>
                 Task updated
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DateTimeFinal)
+                @Html.DisplayNameFor(model => model.ToDoLists[0].DateTimeFinal)
             </th>
             <th>
                 Done
@@ -65,7 +61,7 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model)
+        @foreach (var item in Model.ToDoLists)
         {
         <tr>
             <td>
@@ -92,12 +88,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.TaskDone)
             </td>
-
+            <td>
+                <a asp-action="TaskDone" asp-route-id="@item.Id" class="btn btn-success">Task Done</a>
+            </td>
 
             <td></td>
         
                <td>
-                    <a asp-action="Save" asp-route-id="@item.Id">Save</a> |
                     <a asp-action="EditTask" asp-route-id="@item.Id">Edit</a> |
                     <a asp-action="DetailsTask" asp-route-id="@item.Id">Details</a> |
                     <a asp-action="DeleteTask" asp-route-id="@item.Id">Delete</a>
