@@ -39,6 +39,7 @@ namespace Todoapp.Controllers
         //Add Task
         public IActionResult AddTask(ToDoList toDoList)
         {
+            ModelState.Remove("UserAccount");
             if (ModelState.IsValid)
             {
                 _db.ToDoLists.Add(toDoList);
@@ -147,7 +148,7 @@ namespace Todoapp.Controllers
             {
                 return NotFound();
             }
-            taskFromDb.TaskDone = !toDoList.TaskDone;
+            taskFromDb.TaskDone = !taskFromDb.TaskDone;
 
             _db.ToDoLists.Update(taskFromDb);
             _db.SaveChanges();

@@ -14,6 +14,8 @@
     <None Remove="Configuration\" />
     <None Remove="Controllers\Account_Controller.cs.old" />
     <None Remove="Microsoft.AspNetCore.Authentication.Facebook" />
+    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
+    <None Remove="Database\DbFile\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.1.3" />
@@ -31,8 +33,10 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="6.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.5" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Configuration\" />
+    <Folder Include="Database\DbFile\" />
   </ItemGroup>
 </Project>

@@ -42,5 +42,6 @@ namespace Todoapp.Database
         public bool TaskDone { get; set; }
         
         public UserAccount UserAccount { get; set; }
+
     }
 }
