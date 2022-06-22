@@ -10,14 +10,18 @@
       <h2>Lists</h2>
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
+            <form asp-controller="ToDoList" asp-action="Index" method="get">
+
         <p>
 
-        <select asp-for="TaskListCheck" asp-items="Model.TaskList" method="get">
+        <select asp-for="TaskListCheck" asp-items="Model.TaskList">
             <option value="">All</option>
         </select>
 
             <input type="submit" value="Filter" />
         </p>
+             </form>
+
 
         </li>
 
