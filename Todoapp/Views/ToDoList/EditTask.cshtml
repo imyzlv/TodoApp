@@ -39,13 +39,25 @@
            </div>
                 @foreach (TaskLevelEnum level in Enum.GetValues(typeof(TaskLevelEnum)))
                 {
+                if (level == Model.TaskLevel)
+                {
                     <div class="md-3">
-                    <label>
-                    <input type="radio" asp-for="TaskLevel" value="@Convert.ToInt32(level)"/>
-                    @level
-                    </label>
+                        <label>
+                            <input type="radio" asp-for="TaskLevel" value="@Convert.ToInt32(level)" checked/>
+                            @level
+                        </label>
                     </div>
                 }
+                else
+                {
+                    <div class="md-3">
+                        <label>
+                            <input type="radio" asp-for="TaskLevel" value="@Convert.ToInt32(level)"/>
+                            @level
+                        </label>
+                    </div>
+                }
+            }
             <div class="form-check">
                 <label asp-for="TaskDone" class="form-check-label">Task done</label>
                 <input asp-for="TaskDone" class="form-check-input" />
