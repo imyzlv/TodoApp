@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Todoapp.Migrations
 {
-    public partial class CreateDb : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -25,6 +25,27 @@ namespace Todoapp.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Role", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ToDoLists",
+                schema: "Identity",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Title = table.Column<string>(type: "TEXT", nullable: false),
+                    TaskText = table.Column<string>(type: "TEXT", nullable: false),
+                    TaskList = table.Column<string>(type: "TEXT", nullable: false),
+                    TaskLevel = table.Column<int>(type: "INTEGER", nullable: false),
+                    DateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    DateTimeFinal = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    TaskDone = table.Column<bool>(type: "INTEGER", nullable: false),
+                    UserId = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ToDoLists", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -100,33 +121,6 @@ namespace Todoapp.Migrations
                         principalTable: "User",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ToDoLists",
-                schema: "Identity",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Title = table.Column<string>(type: "TEXT", nullable: false),
-                    TaskText = table.Column<string>(type: "TEXT", nullable: false),
-                    TaskList = table.Column<string>(type: "TEXT", nullable: false),
-                    TaskLevel = table.Column<int>(type: "INTEGER", nullable: false),
-                    DateTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    DateTimeFinal = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    TaskDone = table.Column<bool>(type: "INTEGER", nullable: false),
-                    UserAccountId = table.Column<string>(type: "TEXT", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ToDoLists", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_ToDoLists_User_UserAccountId",
-                        column: x => x.UserAccountId,
-                        principalSchema: "Identity",
-                        principalTable: "User",
-                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
@@ -218,12 +212,6 @@ namespace Todoapp.Migrations
                 schema: "Identity",
                 table: "RoleClaims",
                 column: "RoleId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ToDoLists_UserAccountId",
-                schema: "Identity",
-                table: "ToDoLists",
-                column: "UserAccountId");
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",

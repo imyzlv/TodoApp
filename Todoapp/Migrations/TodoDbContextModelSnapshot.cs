@@ -251,12 +251,10 @@ namespace Todoapp.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("UserAccountId")
+                    b.Property<string>("UserId")
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserAccountId");
 
                     b.ToTable("ToDoLists", "Identity");
                 });
@@ -325,20 +323,6 @@ namespace Todoapp.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("Todoapp.Database.ToDoList", b =>
-                {
-                    b.HasOne("Todoapp.Models.UserAccount", "UserAccount")
-                        .WithMany("ToDoLists")
-                        .HasForeignKey("UserAccountId");
-
-                    b.Navigation("UserAccount");
-                });
-
-            modelBuilder.Entity("Todoapp.Models.UserAccount", b =>
-                {
-                    b.Navigation("ToDoLists");
                 });
 #pragma warning restore 612, 618
         }

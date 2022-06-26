@@ -11,7 +11,6 @@ namespace Todoapp.Models
         public string LastName { get; set; }
         [Required]
         public string UserName { get; set; }
-        public ICollection<ToDoList> ToDoLists { get; set; }
     }
 }
 

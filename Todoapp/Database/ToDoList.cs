@@ -41,7 +41,7 @@ namespace Todoapp.Database
         [Display(Name = "Done")]
         public bool TaskDone { get; set; }
         
-        public UserAccount UserAccount { get; set; }
+        public string? UserId { get; set; }
 
     }
 }
