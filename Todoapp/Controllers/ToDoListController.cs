@@ -97,16 +97,23 @@ namespace Todoapp.Controllers
             {
                 return NotFound();
             }
-            taskFromDb.Title = toDoList.Title.ToString();
-            taskFromDb.TaskText = toDoList.TaskText.ToString();
-            taskFromDb.TaskList = toDoList.TaskList.ToString();
-            taskFromDb.TaskLevel = toDoList.TaskLevel;
-            taskFromDb.DateTimeFinal = toDoList.DateTimeFinal;
-            taskFromDb.TaskDone = toDoList.TaskDone;
+            try
+            {
+                taskFromDb.Title = toDoList.Title.ToString();
+                taskFromDb.TaskText = toDoList.TaskText.ToString();
+                taskFromDb.TaskList = toDoList.TaskList.ToString();
+                taskFromDb.TaskLevel = toDoList.TaskLevel;
+                taskFromDb.DateTimeFinal = toDoList.DateTimeFinal;
+                taskFromDb.TaskDone = toDoList.TaskDone;
 
-            _db.ToDoLists.Update(taskFromDb);
-            _db.SaveChanges();
-            ViewBag.Message = "Task was succesfully updated";
+                _db.ToDoLists.Update(taskFromDb);
+                _db.SaveChanges();
+                ViewBag.Message = "Task was succesfully updated";
+            }
+            catch (NullReferenceException)
+            {
+                ViewBag.Message = "All fields must be filled!";
+            }
 
             return View();
         }
