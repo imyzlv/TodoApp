@@ -33,31 +33,35 @@
                 <label asp-for="DateTimeFinal" class="control-label">Due time</label>
                 <input asp-for="DateTimeFinal" class="form-control" />
             </div>
+            <div class="form-check">
+                <label asp-for="PublicTask" class="form-check-label">Public task</label>
+                <input asp-for="PublicTask" class="form-check-input" type="checkbox" />
+            </div>
 
             <div class="md-3">
                 <label asp-for="TaskLevel" class="">Task Level</label>
-           </div>
-                @foreach (TaskLevelEnum level in Enum.GetValues(typeof(TaskLevelEnum)))
+            </div>
+            @foreach (TaskLevelEnum level in Enum.GetValues(typeof(TaskLevelEnum)))
+            {
+                if (level == 0)
                 {
-                    if (level == 0)
-                    {
                     <div class="md-3">
                         <label>
-                            <input type="radio" asp-for="TaskLevel" value="@Convert.ToInt32(level)" checked/>
+                            <input type="radio" asp-for="TaskLevel" value="@Convert.ToInt32(level)" checked />
                             @level
                         </label>
                     </div>
-                    }
-                    else
-                    {
-                    <div class="md-3">
-                        <label>
-                            <input type="radio" asp-for="TaskLevel" value="@Convert.ToInt32(level)"/>
-                            @level
-                        </label>
-                    </div>
-                    }
                 }
+                else
+                {
+                    <div class="md-3">
+                        <label>
+                            <input type="radio" asp-for="TaskLevel" value="@Convert.ToInt32(level)" />
+                            @level
+                        </label>
+                    </div>
+                }
+            }
             <div>
             </div>
             <div class="form-group">

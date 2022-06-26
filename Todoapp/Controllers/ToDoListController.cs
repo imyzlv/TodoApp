@@ -18,9 +18,8 @@ namespace Todoapp.Controllers
 
         public async Task<IActionResult> Index(string taskListCheck)
         {
-            if (User.FindFirstValue(ClaimTypes.NameIdentifier) == null)
+            if (!User.Identity.IsAuthenticated)
             {
-
                 return Redirect("/Identity/Account/Login");
             }
             else
@@ -30,7 +29,7 @@ namespace Todoapp.Controllers
                                                orderby m.TaskList
                                                select m.TaskList;
                 var task = from m in _db.ToDoLists
-                           where m.UserId == userId
+                           where (m.UserId == userId) || (m.PublicTask == true)
                            select m;
 
                 if (!string.IsNullOrEmpty(taskListCheck))
@@ -56,21 +55,28 @@ namespace Todoapp.Controllers
         [HttpPost]
         public IActionResult AddTask(ToDoList toDoList)
         {
-            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
-            ModelState.Remove("UserAccount");
-            try
+            if (!User.Identity.IsAuthenticated)
             {
-                toDoList.UserId = userId;
-                _db.ToDoLists.Add(toDoList);
-                _db.SaveChanges();
-                ModelState.Clear();
-                ViewBag.Message = "Task was succesfully added";
+                return Redirect("/Identity/Account/Login");
             }
-            catch (DbUpdateException)
+            else
             {
-                    ViewBag.Message = "Do not leave empty fields!";      
+                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+                ModelState.Remove("UserAccount");
+                try
+                {
+                    toDoList.UserId = userId;
+                    _db.ToDoLists.Add(toDoList);
+                    _db.SaveChanges();
+                    ModelState.Clear();
+                    ViewBag.Message = "Task was succesfully added";
+                }
+                catch (DbUpdateException)
+                {
+                    ViewBag.Message = "Do not leave empty fields!";
+                }
+                return View();
             }
-            return View();
 
         }
         //Edit Task
