@@ -43,5 +43,7 @@ namespace Todoapp.Database
         
         public string? UserId { get; set; }
 
+        public bool? PublicTask { get; set; } 
+
     }
 }
