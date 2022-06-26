@@ -32,8 +32,9 @@ builder.Services.AddAuthentication().AddFacebook(options =>
 builder.Services.AddControllersWithViews();
 
 // Read database config from appsettings.json
-//builder.Services.AddDbContext<TodoDbContext>(options => options.UseInMemoryDatabase(
- // builder.Configuration.GetConnectionString("DefaultConnection")));
+// Uncomment for InMemory Db usage:
+//builder.Services.AddDbContext<TodoDbContext>(options => options.UseInMemoryDatabase(builder.Configuration.GetConnectionString("DevelopmentConnection")));
+// Uncomment for SQLite Db usage:
 builder.Services.AddDbContext<TodoDbContext>(options => options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddSession();

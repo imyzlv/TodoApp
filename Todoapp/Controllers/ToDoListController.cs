@@ -3,6 +3,7 @@ using Todoapp.Models;
 using Todoapp.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Security.Claims;
 
 namespace Todoapp.Controllers
 {
@@ -17,37 +18,50 @@ namespace Todoapp.Controllers
 
         public async Task<IActionResult> Index(string taskListCheck)
         {
-            IQueryable<string> listQuery = from m in _db.ToDoLists
-                                            orderby m.TaskList
-                                            select m.TaskList;
-            var task = from m in _db.ToDoLists
-                         select m;
-
-            if (!string.IsNullOrEmpty(taskListCheck))
+            if (User.FindFirstValue(ClaimTypes.NameIdentifier) == null)
             {
-                task = task.Where(x => x.TaskList == taskListCheck);
+
+                return Redirect("/Identity/Account/Login");
             }
-
-            var taskListViewList = new TaskListModel
+            else
             {
-                TaskList = new SelectList(await listQuery.Distinct().ToListAsync()),
-                ToDoLists = await task.ToListAsync()
-            };
+                string userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+                IQueryable<string> listQuery = from m in _db.ToDoLists
+                                               orderby m.TaskList
+                                               select m.TaskList;
+                var task = from m in _db.ToDoLists
+                           where m.UserId == userId
+                           select m;
 
-            return View(taskListViewList);
+                if (!string.IsNullOrEmpty(taskListCheck))
+                {
+                    task = task.Where(x => x.TaskList == taskListCheck);
+                }
+
+                var taskListViewList = new TaskListModel
+                {
+                    TaskList = new SelectList(await listQuery.Distinct().ToListAsync()),
+                    ToDoLists = await task.ToListAsync()
+                };
+
+                return View(taskListViewList);
+            }
         }
         //Add Task
         public IActionResult AddTask(ToDoList toDoList)
         {
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
             ModelState.Remove("UserAccount");
             if (ModelState.IsValid)
             {
+                toDoList.UserId = userId;
                 _db.ToDoLists.Add(toDoList);
                 _db.SaveChanges();
                 ModelState.Clear();
                 ViewBag.Message = "Task was succesfully added";
             }
             return View();
+
         }
         //Edit Task
         [HttpGet]
@@ -69,7 +83,7 @@ namespace Todoapp.Controllers
         public IActionResult EditTask(int Id, ToDoList toDoList)
         {
             var taskFromDb = _db.ToDoLists.Find(Id);
-            if(taskFromDb == null)
+            if (taskFromDb == null)
             {
                 return NotFound();
             }
