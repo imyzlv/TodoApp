@@ -11,20 +11,14 @@
       <ul class="nav nav-pills flex-column">
         <li class="nav-item">
             <form asp-controller="ToDoList" asp-action="Index" method="get">
-
-        <p>
-
-        <select asp-for="TaskListCheck" asp-items="Model.TaskList">
-            <option value="">All</option>
-        </select>
-
-            <input type="submit" value="Filter" />
-        </p>
-             </form>
-
-
+                <p>
+                <select asp-for="TaskListCheck" asp-items="Model.TaskList">
+                <option value="">All</option>
+                </select>
+                <input type="submit" value="Filter" />
+                </p>
+            </form>
         </li>
-
       </ul>
     </div>
 
@@ -58,8 +52,6 @@
             <th>
                 Done
             </th>
-
-
 
             <th></th>
         </tr>
@@ -98,11 +90,11 @@
 
             <td></td>
         
-               <td>
-                    <a asp-action="EditTask" asp-route-id="@item.Id">Edit</a> |
-                    <a asp-action="DetailsTask" asp-route-id="@item.Id">Details</a> |
-                    <a asp-action="DeleteTask" asp-route-id="@item.Id">Delete</a>
-                </td>
+            <td>
+               <a asp-action="EditTask" asp-route-id="@item.Id">Edit</a> |
+               <a asp-action="DetailsTask" asp-route-id="@item.Id">Details</a> |
+               <a asp-action="DeleteTask" asp-route-id="@item.Id">Delete</a>
+            </td>
         </tr>
         }
     </tbody>
@@ -110,69 +102,3 @@
         <td>
             <a class="btn btn-primary" href="/ToDoList/AddTask" role="button">Add Task</a>
         </td>
-
-
-    @* <div class="row">
-        <div class="col-10">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Tasks go here" readonly="">
-            <button type="button" class="btn btn-danger">Delete</button>
-            <button type="button" class="btn btn-warning">Edit</button>
-            <span class="input-group-text">
-              <input type="checkbox" class="form-check-input mt-0" id="def">
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-10">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Tasks go here" readonly="">
-            <button type="button" class="btn btn-danger">Delete</button>
-            <button type="button" class="btn btn-warning">Edit</button>
-            <span class="input-group-text">
-              <input type="checkbox" class="form-check-input mt-0" id="def">
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-10">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Tasks go here" readonly="">
-            <button type="button" class="btn btn-danger">Delete</button>
-            <button type="button" class="btn btn-warning">Edit</button>
-            <span class="input-group-text">
-              <input type="checkbox" class="form-check-input mt-0" id="def">
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-10">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Tasks go here" readonly="">
-            <button type="button" class="btn btn-danger">Delete</button>
-            <button type="button" class="btn btn-warning">Edit</button>
-            <span class="input-group-text">
-              <input type="checkbox" class="form-check-input mt-0" id="def">
-            </span>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-10">
-          <div class="input-group">
-            <input type="text" class="form-control" placeholder="Tasks go here" readonly="">
-            <button type="button" class="btn btn-danger">Delete</button>
-            <button type="button" class="btn btn-warning">Edit</button>
-            <span class="input-group-text">
-              <input type="checkbox" class="form-check-input mt-0" id="def">
-            </span>
-          </div>
-        </div>
-      </div>
-      <button type="button" class="btn btn-primary" style="margin-top:10px">Add task</button>
-    </div>
-  </div>
-  *@

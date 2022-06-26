@@ -3,6 +3,7 @@ using Todoapp.Models;
 using Todoapp.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Data.Sqlite;
 
 namespace Todoapp.Controllers
 {
@@ -37,15 +38,25 @@ namespace Todoapp.Controllers
             return View(taskListViewList);
         }
         //Add Task
+        [HttpGet]
+        public IActionResult AddTask()
+        {
+            return View();
+        }
+        [HttpPost]
         public IActionResult AddTask(ToDoList toDoList)
         {
             ModelState.Remove("UserAccount");
-            if (ModelState.IsValid)
+            try
             {
                 _db.ToDoLists.Add(toDoList);
                 _db.SaveChanges();
                 ModelState.Clear();
                 ViewBag.Message = "Task was succesfully added";
+            }
+            catch (DbUpdateException)
+            {
+                    ViewBag.Message = "Do not leave empty fields!";      
             }
             return View();
         }
