@@ -6,15 +6,31 @@
 }
 
 <script>
-    function loadCompleted(partialView) {
+    function loadCompleted() {
+        var $hidden = $('#hidden');
         $.ajax({
-            url: '@Url.Action("LoadCompletedTasks", "ToDoList")',
-            data: { id: partialView },
-            type: "GET",
-            success: function(data) {
-                $('#hidden').html(data);
-            }
-        });
+                url: '@Url.Action("LoadCompletedTasks", "ToDoList")',
+                type: "GET",
+                cache: false,
+                success: function (data) {
+                    $hidden.html(data);
+                    $hidden.empty();
+                }
+            });
+        if ($hidden.is(':empty')) {
+            $.ajax({
+                url: '@Url.Action("LoadCompletedTasks", "ToDoList")',
+                type: "GET",
+                cache: false,
+                success: function (data) {
+                    $hidden.html(data);
+                }
+            });
+        }
+        else {
+            $hidden.empty();
+        }
+        return false;
     }
 </script>
 
