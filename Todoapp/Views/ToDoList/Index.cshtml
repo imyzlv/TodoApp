@@ -7,19 +7,19 @@
 
 <script>
     function loadCompleted() {
-        var $hidden = $('#hidden');
-        if ($hidden.is(':empty')) {
+        var $completedItems = $('#completedItems');
+        if ($completedItems.is(':empty')) {
             $.ajax({
                 url: '@Url.Action("LoadCompletedTasks", "ToDoList")',
                 type: "GET",
                 cache: false,
                 success: function (data) {
-                    $hidden.html(data);
+                    $completedItems.html(data);
                 }
             });
         }
         else {
-            $hidden.empty();
+            $completedItems.empty();
         }
         return false;
     }
@@ -130,6 +130,4 @@
     </div>
 </div>
 
-<div id="hidden">
-
-</div>
+<div id="completedItems"></div>

@@ -10,7 +10,6 @@ namespace Todoapp.Controllers
     public class ToDoListController : Controller
     {
         private readonly TodoDbContext _db;
-        public bool showCompleted = false;
 
         public ToDoListController(TodoDbContext db)
         {
@@ -189,14 +188,13 @@ namespace Todoapp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public ActionResult LoadCompletedTasks()
+        public IActionResult LoadCompletedTasks()
         {
-            showCompleted = !showCompleted;
-            if (showCompleted)
-            {
-                return PartialView("CompletedTasks");
-            }
-            return RedirectToAction("Index");
+            string userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+            var completedItems = from b in _db.ToDoLists
+                                 where (b.UserId == userId) && (b.TaskDone == true)
+                                 select b;
+            return PartialView("CompletedTasks", completedItems.ToList());
         }
 
     }
