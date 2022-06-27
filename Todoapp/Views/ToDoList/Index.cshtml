@@ -2,103 +2,110 @@
 @model Todoapp.Models.TaskListModel
 
 @{
-	    ViewData["Title"] = "ToDo List";
+    ViewData["Title"] = "ToDo List";
 }
 
-  <div class="row">
+
+<div class="row">
     <div class="col-sm-2">
-      <h2>Lists</h2>
-      <ul class="nav nav-pills flex-column">
-        <li class="nav-item">
-            <form asp-controller="ToDoList" asp-action="Index" method="get">
-                <p>
-                <select asp-for="TaskListCheck" asp-items="Model.TaskList">
-                <option value="">All</option>
-                </select>
-                <input type="submit" value="Filter" />
-                </p>
-            </form>
-        </li>
-      </ul>
+        <h2>Lists</h2>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <form asp-controller="ToDoList" asp-action="Index" method="get">
+                    <p>
+                        <select asp-for="TaskListCheck" asp-items="Model.TaskList">
+                            <option value="">All</option>
+                        </select>
+                        <input type="submit" value="Filter" />
+                    </p>
+                </form>
+            </li>
+        </ul>
     </div>
 
     <div class="col-8">
-      <h2>Tasks</h2>
+        <h2>Tasks</h2>
 
-      <table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ToDoLists[0].Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToDoLists[0].Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToDoLists[0].TaskText)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToDoLists[0].TaskList)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToDoLists[0].TaskLevel)
-            </th>
-            <th>
-                Task updated
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ToDoLists[0].DateTimeFinal)
-            </th>
-            <th>
-                Done
-            </th>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToDoLists[0].Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToDoLists[0].TaskText)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToDoLists[0].TaskList)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToDoLists[0].TaskLevel)
+                    </th>
+                    <th>
+                        Task updated
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ToDoLists[0].DateTimeFinal)
+                    </th>
+                    <th>
+                        Done
+                    </th>
+                    <th></th>
+                    <th>
+                        Creator
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
 
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.ToDoLists)
-        {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelitem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskText)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskList)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskLevel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTime)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateTimeFinal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TaskDone)
-            </td>
-            <td>
-                <a asp-action="TaskDone" asp-route-id="@item.Id" class="btn btn-success">Task Done</a>
-            </td>
-
-            <td></td>
-        
-            <td>
-               <a asp-action="EditTask" asp-route-id="@item.Id">Edit</a> |
-               <a asp-action="DetailsTask" asp-route-id="@item.Id">Details</a> |
-               <a asp-action="DeleteTask" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-        }
-    </tbody>
-</table>
+                @foreach (var item in Model.ToDoLists)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Title)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TaskText)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TaskList)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TaskLevel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateTime)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateTimeFinal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TaskDone)
+                        </td>
+                        <td>
+                            <a asp-action="TaskDone" asp-route-id="@item.Id" class="btn btn-success">Task Done</a>
+                        </td>
+                        <td>
+                            @foreach (var i in Model.UserList)
+                            {
+                                @if (i.Id == item.UserId)
+                                {
+                                    @Html.DisplayFor(modelItem => i.UserName);
+                                }
+                            }
+                        </td>
+                        <td>
+                            <a asp-action="EditTask" asp-route-id="@item.Id">Edit</a> |
+                            <a asp-action="DetailsTask" asp-route-id="@item.Id">Details</a> |
+                            <a asp-action="DeleteTask" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
         <td>
             <a class="btn btn-primary" href="/ToDoList/AddTask" role="button">Add Task</a>
         </td>
+    </div>
+</div>

@@ -29,9 +29,10 @@ namespace Todoapp.Controllers
                                                orderby m.TaskList
                                                select m.TaskList;
                 var task = from m in _db.ToDoLists
-                           where (m.UserId == userId) || (m.PublicTask == true)
+                           where ((m.UserId == userId) || (m.PublicTask == true)) && (!m.TaskDone)
                            select m;
-
+                var userNameFromDb = from c in _db.Users
+                                     select c;
                 if (!string.IsNullOrEmpty(taskListCheck))
                 {
                     task = task.Where(x => x.TaskList == taskListCheck);
@@ -40,7 +41,8 @@ namespace Todoapp.Controllers
                 var taskListViewList = new TaskListModel
                 {
                     TaskList = new SelectList(await listQuery.Distinct().ToListAsync()),
-                    ToDoLists = await task.ToListAsync()
+                    ToDoLists = await task.ToListAsync(),
+                    UserList = userNameFromDb.ToList()
                 };
 
                 return View(taskListViewList);
@@ -186,6 +188,10 @@ namespace Todoapp.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        public ActionResult LoadCompletedTasks()
+        {
+            return PartialView("CompletedTasks");
+        }
 
     }
 }
