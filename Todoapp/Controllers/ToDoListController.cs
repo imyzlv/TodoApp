@@ -116,7 +116,7 @@ namespace Todoapp.Controllers
             _db.SaveChanges();
             ViewBag.Message = "Task was succesfully updated";
 
-            return View(taskFromDb);
+            return View();
         }
 
         //Details about task
