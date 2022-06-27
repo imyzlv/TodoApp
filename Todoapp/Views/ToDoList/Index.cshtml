@@ -8,15 +8,6 @@
 <script>
     function loadCompleted() {
         var $hidden = $('#hidden');
-        $.ajax({
-                url: '@Url.Action("LoadCompletedTasks", "ToDoList")',
-                type: "GET",
-                cache: false,
-                success: function (data) {
-                    $hidden.html(data);
-                    $hidden.empty();
-                }
-            });
         if ($hidden.is(':empty')) {
             $.ajax({
                 url: '@Url.Action("LoadCompletedTasks", "ToDoList")',
