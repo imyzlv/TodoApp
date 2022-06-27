@@ -10,6 +10,7 @@ namespace Todoapp.Controllers
     public class ToDoListController : Controller
     {
         private readonly TodoDbContext _db;
+        public bool showCompleted = false;
 
         public ToDoListController(TodoDbContext db)
         {
@@ -190,7 +191,12 @@ namespace Todoapp.Controllers
 
         public ActionResult LoadCompletedTasks()
         {
-            return PartialView("CompletedTasks");
+            showCompleted = !showCompleted;
+            if (showCompleted)
+            {
+                return PartialView("CompletedTasks");
+            }
+            return RedirectToAction("Index");
         }
 
     }

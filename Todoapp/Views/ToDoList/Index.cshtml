@@ -5,6 +5,18 @@
     ViewData["Title"] = "ToDo List";
 }
 
+<script>
+    function loadCompleted(partialView) {
+        $.ajax({
+            url: '@Url.Action("LoadCompletedTasks", "ToDoList")',
+            data: { id: partialView },
+            type: "GET",
+            success: function(data) {
+                $('#hidden').html(data);
+            }
+        });
+    }
+</script>
 
 <div class="row">
     <div class="col-sm-2">
@@ -106,6 +118,11 @@
         </table>
         <td>
             <a class="btn btn-primary" href="/ToDoList/AddTask" role="button">Add Task</a>
+            <a class="btn btn-primary" id="loadData" role="button" onclick="loadCompleted()">Show completed</a>
         </td>
     </div>
+</div>
+
+<div id="hidden">
+
 </div>
