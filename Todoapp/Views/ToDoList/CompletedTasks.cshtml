@@ -1,8 +1,34 @@
-﻿@model Todoapp.Models.TaskListModel
+﻿
+@model IEnumerable<Todoapp.Database.ToDoList>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Task Text
+                </th>
+                <th>
+                    Finished on
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TaskText)
+                    </td>
+                    <td>
+                        @item.DateTime.ToString("dd.MM.yyyy HH:mm")
+                    </td>
 
-<p>
-    Completed task list will go here
-</p>
-<div class="col-8">
-
-</div>
+                </tr>
+            }
+        </tbody>
+    </table>

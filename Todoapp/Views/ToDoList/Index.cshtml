@@ -61,9 +61,6 @@
                         @Html.DisplayNameFor(model => model.ToDoLists[0].TaskLevel)
                     </th>
                     <th>
-                        Task updated
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.ToDoLists[0].DateTimeFinal)
                     </th>
                     <th>
@@ -94,16 +91,13 @@
                             @Html.DisplayFor(modelItem => item.TaskLevel)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DateTime)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.DateTimeFinal)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.TaskDone)
                         </td>
                         <td>
-                            <a asp-action="TaskDone" asp-route-id="@item.Id" class="btn btn-success">Task Done</a>
+                            <a asp-action="TaskDone" asp-route-id="@item.Id" class="btn btn-success">Done</a>
                         </td>
                         <td>
                             @foreach (var i in Model.UserList)
@@ -116,7 +110,6 @@
                         </td>
                         <td>
                             <a asp-action="EditTask" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="DetailsTask" asp-route-id="@item.Id">Details</a> |
                             <a asp-action="DeleteTask" asp-route-id="@item.Id">Delete</a>
                         </td>
                     </tr>
@@ -127,7 +120,8 @@
             <a class="btn btn-primary" href="/ToDoList/AddTask" role="button">Add Task</a>
             <a class="btn btn-primary" id="loadData" role="button" onclick="loadCompleted()">Show completed</a>
         </td>
+        <!--A partial view with finished items is being loaded here-->
+        <div id="completedItems"></div>
     </div>
 </div>
 
-<div id="completedItems"></div>

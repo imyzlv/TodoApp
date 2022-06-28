@@ -181,7 +181,7 @@ namespace Todoapp.Controllers
                 return NotFound();
             }
             taskFromDb.TaskDone = !taskFromDb.TaskDone;
-
+            taskFromDb.DateTime = DateTime.Now;
             _db.ToDoLists.Update(taskFromDb);
             _db.SaveChanges();
 
@@ -194,6 +194,7 @@ namespace Todoapp.Controllers
             var completedItems = from b in _db.ToDoLists
                                  where (b.UserId == userId) && (b.TaskDone == true)
                                  select b;
+            //var completedItems = _db.ToDoLists.Find(4);
             return PartialView("CompletedTasks", completedItems.ToList());
         }
 
