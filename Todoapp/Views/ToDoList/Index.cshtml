@@ -42,7 +42,7 @@
         </ul>
     </div>
 
-    <div class="col-8">
+    <div class="col-10">
         <h2>Tasks</h2>
 
         <table class="table">
@@ -66,11 +66,11 @@
                     <th>
                         Done
                     </th>
-                    <th></th>
                     <th>
                         Creator
                     </th>
                     <th></th>
+                    <th>
                 </tr>
             </thead>
             <tbody>
@@ -94,9 +94,6 @@
                             @Html.DisplayFor(modelItem => item.DateTimeFinal)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.TaskDone)
-                        </td>
-                        <td>
                             <a asp-action="TaskDone" asp-route-id="@item.Id" class="btn btn-success btn-sm text-nowrap">
                                 <i class="bi bi-check-square"></i>&nbsp;Done
                             </a>
@@ -111,23 +108,30 @@
                             }
                         </td>
                         <td>
-                            <a asp-action="EditTask" asp-route-id="@item.Id" class="text-nowrap"><i class="bi bi-pencil-square"></i>&nbsp;Edit</a>
-                        </td>
-                        <td>
-                            <a asp-action="DeleteTask" asp-route-id="@item.Id" class="text-nowrap"><i class="bi bi-trash"></i>&nbsp;Delete</a>
+                            <div class="btn-group" role="group">
+                            <a asp-action="EditTask" asp-route-id="@item.Id" class="text-nowrap btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+                            <a asp-action="DeleteTask" asp-route-id="@item.Id" class="text-nowrap btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                                </div>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
-        <td>
-            <a class="btn btn-primary" href="/ToDoList/AddTask" role="button">
-                <i class="bi bi-pencil-square"></i>&nbsp;Add Task
-            </a>
-            <a class="btn btn-primary" id="loadData" role="button" onclick="loadCompleted()">
-                <i class="bi bi-list-check"></i>&nbsp;Show completed
-            </a>
-        </td>
+        <div class="container p-1">
+            <div class="row pt-2">
+                <div class="col-6">
+                    <a class="btn btn-primary" href="/ToDoList/AddTask" role="button">
+                        <i class="bi bi-pencil-square"></i>&nbsp;Add Task
+                    </a>
+                </div>
+
+                <div class="col-6 text-end">
+                    <a class="btn btn-secondary" id="loadData" role="button" onclick="loadCompleted()">
+                        <i class="bi bi-list-check"></i>&nbsp;Show completed
+                    </a>
+                </div>
+            </div>
+        </div>
         <!--A partial view with finished items is being loaded here-->
         <div id="completedItems"></div>
     </div>
