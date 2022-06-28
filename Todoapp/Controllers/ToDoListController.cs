@@ -15,7 +15,7 @@ namespace Todoapp.Controllers
         private readonly TodoDbContext _db;
 
         //Global variable for current user Id.
-        public static string userId;
+        public static string userId = null;
 
         public ToDoListController(TodoDbContext db)
         {

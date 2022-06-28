@@ -97,7 +97,9 @@
                             @Html.DisplayFor(modelItem => item.TaskDone)
                         </td>
                         <td>
-                            <a asp-action="TaskDone" asp-route-id="@item.Id" class="btn btn-success">Done</a>
+                            <a asp-action="TaskDone" asp-route-id="@item.Id" class="btn btn-success btn-sm text-nowrap">
+                                <i class="bi bi-check-square"></i>&nbsp;Done
+                            </a>
                         </td>
                         <td>
                             @foreach (var i in Model.UserList)
@@ -109,16 +111,22 @@
                             }
                         </td>
                         <td>
-                            <a asp-action="EditTask" asp-route-id="@item.Id">Edit</a> |
-                            <a asp-action="DeleteTask" asp-route-id="@item.Id">Delete</a>
+                            <a asp-action="EditTask" asp-route-id="@item.Id" class="text-nowrap"><i class="bi bi-pencil-square"></i>&nbsp;Edit</a>
+                        </td>
+                        <td>
+                            <a asp-action="DeleteTask" asp-route-id="@item.Id" class="text-nowrap"><i class="bi bi-trash"></i>&nbsp;Delete</a>
                         </td>
                     </tr>
                 }
             </tbody>
         </table>
         <td>
-            <a class="btn btn-primary" href="/ToDoList/AddTask" role="button">Add Task</a>
-            <a class="btn btn-primary" id="loadData" role="button" onclick="loadCompleted()">Show completed</a>
+            <a class="btn btn-primary" href="/ToDoList/AddTask" role="button">
+                <i class="bi bi-pencil-square"></i>&nbsp;Add Task
+            </a>
+            <a class="btn btn-primary" id="loadData" role="button" onclick="loadCompleted()">
+                <i class="bi bi-list-check"></i>&nbsp;Show completed
+            </a>
         </td>
         <!--A partial view with finished items is being loaded here-->
         <div id="completedItems"></div>
