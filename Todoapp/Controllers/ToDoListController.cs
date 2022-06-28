@@ -115,7 +115,7 @@ namespace Todoapp.Controllers
             {
                 ViewBag.Message = "Do not leave empty fields!";
             }
-            return View(taskFromDb);
+            return RedirectToAction("Index");
         }
 
         //Details about task

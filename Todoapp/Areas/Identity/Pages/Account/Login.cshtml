@@ -3,12 +3,19 @@
 
 @{
     ViewData["Title"] = "Log in";
+    @inject IConfiguration config;
+    var conf = new Todoapp.Configuration.TodoConfiguration(config);
+    ViewData["Title"] = conf.GetAppName();//"TodoApp Home";
 }
+<div class="text-center">
+    </i><h1 class="display-4"><i class="bi bi-check2-circle"></i>@conf.GetAppName()  </h1>
+
+</div>
 <div class="row justify-content-md-center">
     <div class="col-md-4">
         <section>
             <form id="account" method="post">
-                <h2>Log in into an existing account.</h2>
+
                 <hr />
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-floating">
@@ -32,18 +39,22 @@
                 <div>
                     <button id="login-submit" type="submit" class="w-100 btn btn-lg btn-primary">Log in</button>
                 </div>
-                <div class="form-floating">
+
+            </form>
+            <div class="form-floating">
+
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                     <p>
                         Login with Facebook
                     </p>
                     <p>
                         @foreach (var provider in Model.ExternalLogins)
                         {
-                            <a type="submit" class="facebook-btn w-100 btn btn-lg btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="bi bi-facebook"></i>@provider.DisplayName</a>
+                            <button type="submit" class="facebook-btn w-100 btn btn-lg btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account"><i class="bi bi-facebook"></i>&nbsp;@provider.DisplayName</button>
                         }
                     </p>
-                </div>
-            </form>
+                </form>
+            </div>
         </section>
     </div>
 </div>

@@ -26,7 +26,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddAuthentication().AddFacebook(options =>
 {
     options.AppId = "3185878064996702";
-    options.AppSecret = "5082640f79f785985d2211a6d84af7f0";
+    options.AppSecret = "secret";
 });
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -67,7 +67,7 @@ app.UseAuthorization();
 app.MapRazorPages(); // Needed for identity functionality
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=ToDoList}/{action=Index}/{id?}");
 
 app.Run();
 

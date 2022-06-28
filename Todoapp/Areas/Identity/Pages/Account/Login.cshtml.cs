@@ -104,7 +104,7 @@ namespace Todoapp.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = "~/ToDoList/Index";// ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/"); //"~/ToDoList/Index";// 
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 

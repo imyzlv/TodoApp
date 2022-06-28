@@ -27,6 +27,7 @@ namespace Todoapp.Areas.Identity.Pages.Account
         {
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
+            returnUrl = "~/Identity/Account/Login";
             if (returnUrl != null)
             {
                 return LocalRedirect(returnUrl);

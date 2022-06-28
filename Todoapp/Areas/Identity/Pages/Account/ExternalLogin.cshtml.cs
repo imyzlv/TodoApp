@@ -100,7 +100,7 @@ namespace Todoapp.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnGetCallbackAsync(string returnUrl = null, string remoteError = null)
         {
-            returnUrl = "~/ToDoList/Index";
+            //returnUrl = "~/ToDoList/Index";
             returnUrl = returnUrl ?? Url.Content("~/");
             if (remoteError != null)
             {
