@@ -16,3 +16,8 @@ html {
 body {
   margin-bottom: 60px;
 }
+
+.facebook-btn {
+background-color: #3C589C;
+color: white;
+}
