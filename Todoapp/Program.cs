@@ -26,7 +26,7 @@ builder.Services.Configure<IdentityOptions>(options =>
 builder.Services.AddAuthentication().AddFacebook(options =>
 {
     options.AppId = "3185878064996702";
-    options.AppSecret = "secret";
+    options.AppSecret = "5082640f79f785985d2211a6d84af7f0";
 });
 // Add services to the container.
 builder.Services.AddControllersWithViews();
