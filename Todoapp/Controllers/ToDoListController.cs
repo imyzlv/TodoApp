@@ -25,6 +25,7 @@ namespace Todoapp.Controllers
         public async Task<IActionResult> Index(string taskListCheck)
         {
             userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
+            // Fetch "lists" for filtering
             IQueryable<string> listQuery = from m in _db.ToDoLists
                                            where m.UserId == userId && !m.TaskDone
                                            orderby m.TaskList
@@ -33,6 +34,7 @@ namespace Todoapp.Controllers
             var task = from m in _db.ToDoLists
                        where ((m.UserId == userId) || (m.PublicTask == true)) && (!m.TaskDone)
                        select m;
+
             var userNameFromDb = from c in _db.Users
                                  select c;
             if (!string.IsNullOrEmpty(taskListCheck))
@@ -101,7 +103,7 @@ namespace Todoapp.Controllers
                 return NotFound();
             }
             try
-            { 
+            {
                 taskFromDb.Title = toDoList.Title.ToString();
                 taskFromDb.TaskText = toDoList.TaskText.ToString();
                 taskFromDb.TaskList = toDoList.TaskList.ToString();
@@ -187,7 +189,7 @@ namespace Todoapp.Controllers
             taskFromDb.DateTime = DateTime.Now;
             _db.ToDoLists.Update(taskFromDb);
             _db.SaveChanges();
-            TempData["success"] = "Task completed!";
+            TempData["success"] = taskFromDb.Title.ToString() + " is completed!";
             return RedirectToAction(nameof(Index));
         }
 
