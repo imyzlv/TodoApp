@@ -27,7 +27,7 @@
 
 <div class="row">
     <div class="col-sm-2">
-        <h2>Lists</h2>
+        <h5>Lists</h5>
         <ul class="nav nav-pills flex-column">
             <li class="nav-item">
                 <form asp-controller="ToDoList" asp-action="Index" method="get">
@@ -43,9 +43,9 @@
     </div>
 
     <div class="col-10">
-        <h2>Tasks</h2>
+        <h3>Active task list</h3>
 
-        <table class="table">
+        <table class="table table-striped">
             <thead>
                 <tr>
                     <th>
@@ -70,7 +70,6 @@
                         Creator
                     </th>
                     <th></th>
-                    <th>
                 </tr>
             </thead>
             <tbody>
