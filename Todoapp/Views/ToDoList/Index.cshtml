@@ -5,6 +5,19 @@
     ViewData["Title"] = "ToDo List";
 }
 
+@if (TempData["success"] != null)
+{
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script type="text/javascript">
+        toastr.options = {
+            "timeOut": "1500"
+        }
+        toastr.success('@TempData["success"]')
+
+    </script>
+}
+
 <script>
     function loadCompleted() {
         var $completedItems = $('#completedItems');
@@ -102,8 +115,6 @@
                             }
                         </td>
                         <td>
-
-                            
                         </td>
                         <td>
                             <a asp-action="TaskDone" asp-route-id="@item.Id" class="btn btn-success btn-sm text-nowrap">

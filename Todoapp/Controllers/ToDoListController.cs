@@ -72,6 +72,7 @@ namespace Todoapp.Controllers
             {
                 ViewBag.Message = "Do not leave empty fields!";
             }
+            TempData["success"] = "Task added successfully.";
             return RedirectToAction("Index");
 
         }
@@ -116,6 +117,7 @@ namespace Todoapp.Controllers
             {
                 ViewBag.Message = "Do not leave empty fields!";
             }
+            TempData["success"] = "Task updated successfully.";
             return RedirectToAction("Index");
         }
 
@@ -152,7 +154,7 @@ namespace Todoapp.Controllers
             {
                 return NotFound();
             }
-
+            TempData["success"] = "Task deleted.";
             return View(task);
         }
 
@@ -185,7 +187,7 @@ namespace Todoapp.Controllers
             taskFromDb.DateTime = DateTime.Now;
             _db.ToDoLists.Update(taskFromDb);
             _db.SaveChanges();
-
+            TempData["success"] = "Task completed!";
             return RedirectToAction(nameof(Index));
         }
 
