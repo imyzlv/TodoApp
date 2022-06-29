@@ -26,6 +26,7 @@ namespace Todoapp.Controllers
         {
             userId = User.FindFirstValue(ClaimTypes.NameIdentifier).ToString();
             IQueryable<string> listQuery = from m in _db.ToDoLists
+                                           where m.UserId == userId && !m.TaskDone
                                            orderby m.TaskList
                                            select m.TaskList;
             //Fetch data from 2 tables: tasks from the 1st one and creator from the other

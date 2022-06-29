@@ -64,10 +64,10 @@
                         @Html.DisplayNameFor(model => model.ToDoLists[0].DateTimeFinal)
                     </th>
                     <th>
-                        Done
+                        Creator
                     </th>
                     <th>
-                        Creator
+
                     </th>
                     <th></th>
                 </tr>
@@ -93,11 +93,6 @@
                             @Html.DisplayFor(modelItem => item.DateTimeFinal)
                         </td>
                         <td>
-                            <a asp-action="TaskDone" asp-route-id="@item.Id" class="btn btn-success btn-sm text-nowrap">
-                                <i class="bi bi-check-square"></i>&nbsp;Done
-                            </a>
-                        </td>
-                        <td>
                             @foreach (var i in Model.UserList)
                             {
                                 @if (i.Id == item.UserId)
@@ -107,10 +102,18 @@
                             }
                         </td>
                         <td>
+
+                            
+                        </td>
+                        <td>
+                            <a asp-action="TaskDone" asp-route-id="@item.Id" class="btn btn-success btn-sm text-nowrap">
+                                <i class="bi bi-check-square"></i>
+                            </a>
                             <div class="btn-group" role="group">
-                            <a asp-action="EditTask" asp-route-id="@item.Id" class="text-nowrap btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
-                            <a asp-action="DeleteTask" asp-route-id="@item.Id" class="text-nowrap btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
-                                </div>
+
+                                <a asp-action="EditTask" asp-route-id="@item.Id" class="text-nowrap btn btn-primary btn-sm"><i class="bi bi-pencil-square"></i></a>
+                                <a asp-action="DeleteTask" asp-route-id="@item.Id" class="text-nowrap btn btn-danger btn-sm"><i class="bi bi-trash"></i></a>
+                            </div>
                         </td>
                     </tr>
                 }
