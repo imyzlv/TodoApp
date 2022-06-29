@@ -69,13 +69,14 @@ namespace Todoapp.Controllers
                 _db.SaveChanges();
                 ModelState.Clear();
                 ViewBag.Message = "Task was succesfully added";
+                TempData["success"] = "Task added successfully.";
             }
             catch (DbUpdateException)
             {
                 ViewBag.Message = "Do not leave empty fields!";
             }
-            TempData["success"] = "Task added successfully.";
-            return RedirectToAction("Index");
+            //return RedirectToAction("Index");
+            return View();
 
         }
         //Edit Task
@@ -113,14 +114,15 @@ namespace Todoapp.Controllers
 
                 _db.ToDoLists.Update(taskFromDb);
                 _db.SaveChanges();
+                TempData["success"] = "Task updated successfully.";
                 ViewBag.Message = "Task was succesfully updated";
             }
             catch (NullReferenceException)
             {
                 ViewBag.Message = "Do not leave empty fields!";
             }
-            TempData["success"] = "Task updated successfully.";
-            return RedirectToAction("Index");
+
+            return View(taskFromDb);
         }
 
         //Details about task
