@@ -9,7 +9,5 @@ namespace Todoapp.Models
 
         public SelectList? TaskList { get; set; }
         public string? TaskListCheck { get; set; }
-
-        public List<Microsoft.AspNetCore.Identity.IdentityUser> UserList {get;set; }
     }
 }

@@ -15,7 +15,7 @@ namespace Todoapp.Database
         public string TaskText { get; set; }
 
         [Required]
-        [Display(Name = "List")]
+        [Display(Name = "Task list")]
         public string TaskList { get; set; }
 
         public enum TaskLevelEnum
@@ -29,7 +29,7 @@ namespace Todoapp.Database
             VeryHigh
         }
 
-        [Display(Name = "Urgency")]
+        [Display(Name = "Task level")]
         public TaskLevelEnum TaskLevel { get; set; }
         
         public DateTime DateTime { get; set; } = DateTime.Now;

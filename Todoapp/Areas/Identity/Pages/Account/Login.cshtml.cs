@@ -65,7 +65,6 @@ namespace Todoapp.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [Required]
-            [Display(Name = "Username")]
             //[EmailAddress]
             public string UserName { get; set; }
 
@@ -104,7 +103,7 @@ namespace Todoapp.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/"); //"~/ToDoList/Index";// 
+            returnUrl ??= Url.Content("~/");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -116,7 +115,6 @@ namespace Todoapp.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    //return LocalRedirect(returnUrl);
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
